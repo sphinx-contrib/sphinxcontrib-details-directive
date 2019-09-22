@@ -13,7 +13,8 @@ import pytest
 def test_html_build(app, status, warning):
     app.build()
     content = (app.outdir / 'index.html').text()
-    assert '<details><summary>caption</summary><p>blah blah blah</p>\n</details>' in content
+    assert '<details>\n<summary>\ncaption</summary><p>blah blah blah</p>\n</details>' in content
+    assert '<details open="open">\n<summary>\nfoo</summary><p>bar baz qux</p>\n</details>' in content
 
 
 @pytest.mark.sphinx('latex')

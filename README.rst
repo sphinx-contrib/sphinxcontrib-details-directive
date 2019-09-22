@@ -32,3 +32,5 @@ extensions = ['sphinxcontrib.details.directive]
 
    It will be rendered with ``<details>`` tag in HTML output.  On the other hand, for
    other output formats, it will be rendered as mere paragraphs.
+
+   ``:open:`` flag is allowed to indicate the details block is opened by default.
