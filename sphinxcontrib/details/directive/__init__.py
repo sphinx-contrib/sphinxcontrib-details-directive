@@ -12,6 +12,8 @@ from docutils.parsers.rst import Directive, directives
 from sphinx.transforms.post_transforms import SphinxPostTransform
 from sphinx.util.nodes import NodeMatcher
 
+from sphinxcontrib.details.directive.version import __version__
+
 
 class details(nodes.Element, nodes.General):
     pass
@@ -84,5 +86,7 @@ def setup(app):
     app.add_post_transform(DetailsTransform)
 
     return {
+        'version': __version__,
         'parallel_read_safe': True,
+        'parallel_write_safe': True,
     }
