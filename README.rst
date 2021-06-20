@@ -7,7 +7,8 @@ sphinxcontrib-details-directive
 It enables ``details`` directive as an element to represent ``<details>`` element in HTML output.
 It will be converted into mere paragraphs in other output formats.
 
-## Install
+Install
+=======
 
 Install the package via pip::
 
@@ -18,7 +19,8 @@ And append ``sphinxcontrib.details.directive`` to extensions list in your conf.p
 
   extensions = ['sphinxcontrib.details.directive]
 
-## Directive
+Directive
+=========
 
 **details**
 
