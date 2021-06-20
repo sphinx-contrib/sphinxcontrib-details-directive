@@ -23,7 +23,6 @@ Directive
 =========
 
 **details**
-
   ``details`` directive create a ``<details>`` block containing following contents::
 
     .. details:: summary of the detail block
