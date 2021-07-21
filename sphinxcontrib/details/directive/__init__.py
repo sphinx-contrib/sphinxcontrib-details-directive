@@ -43,15 +43,15 @@ def depart_summary(self, node):
 
 
 def visit_details_latex(self, node):
-    if "sphinxdetails" not in self.elements["preamble"]:
+    if "newenvironment{sphinxdetails}" not in self.elements["preamble"]:
         self.elements["preamble"] += \
-            "\n\\newenvironment{sphinxdetails}[1]{}{}\n"
+            "\n\\newenvironment{sphinxdetails}{}{}\n"
 
-    self.body.append("\n\\bgroup\\begin{sphinxdetails}\n")
+    self.body.append("\n\\begin{sphinxdetails}\n")
 
 
 def depart_details_latex(self, node):
-    self.body.append("\\end{sphinxdetails}\\egroup\n")
+    self.body.append("\\end{sphinxdetails}\n")
 
 
 def visit_summary_latex(self, node):
