@@ -42,6 +42,30 @@ def depart_summary(self, node):
     self.body.append('</summary>')
 
 
+def visit_details_latex(self, node):
+    if "newenvironment{sphinxdetails}" not in self.elements["preamble"]:
+        self.elements["preamble"] += \
+            "\n\\newenvironment{sphinxdetails}{}{}\n"
+
+    self.body.append("\n\\begin{sphinxdetails}\n")
+
+
+def depart_details_latex(self, node):
+    self.body.append("\\end{sphinxdetails}\n")
+
+
+def visit_summary_latex(self, node):
+    if "sphinxdetailssummary" not in self.elements["preamble"]:
+        self.elements["preamble"] += \
+            "\n\\newcommand{\\sphinxdetailssummary}[1]{#1}\n"
+    self.body.append("\\sphinxdetailssummary{")
+
+
+def depart_summary_latex(self, node):
+    self.body.append("}\n")
+
+
+
 class DetailsDirective(Directive):
     required_arguments = 1
     final_argument_whitespace = True
@@ -68,7 +92,7 @@ class DetailsDirective(Directive):
 
 class DetailsTransform(SphinxPostTransform):
     default_priority = 200
-    builders = ('html',)
+    builders = ('html', 'latex')
 
     def run(self):
         matcher = NodeMatcher(nodes.container, type='details')
@@ -80,8 +104,10 @@ class DetailsTransform(SphinxPostTransform):
 
 
 def setup(app):
-    app.add_node(details, html=(visit_details, depart_details))
-    app.add_node(summary, html=(visit_summary, depart_summary))
+    app.add_node(details, html=(visit_details, depart_details),
+                 latex=(visit_details_latex, depart_details_latex))
+    app.add_node(summary, html=(visit_summary, depart_summary),
+                 latex=(visit_summary_latex, depart_summary_latex))
     app.add_directive('details', DetailsDirective)
     app.add_post_transform(DetailsTransform)
 
