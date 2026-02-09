@@ -1,7 +1,7 @@
 import os
 from typing import Dict
 
-from setuptools import find_packages, setup
+from setuptools import find_namespace_packages, setup
 
 
 def get_long_description():
@@ -44,7 +44,7 @@ setup(
         'Topic :: Documentation :: Sphinx',
         'Topic :: Utilities',
     ],
-    packages=find_packages(),
+    packages=find_namespace_packages(include=['sphinxcontrib.*']),
     install_requires=[
         'Sphinx>=2.0',
     ],
@@ -57,5 +57,4 @@ setup(
             'mypy',
         ],
     },
-    namespace_packages=['sphinxcontrib'],
 )
